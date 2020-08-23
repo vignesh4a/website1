@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+<link rel="icon" href="{% static 'images/logo.png' %}">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  <head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CanBuild</title>
+  </head>
+
+
+  <body id="bd" class="bdark">
+    <nav  id="navi" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <a class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="CANBUILS" width="30"> Canbuild </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'one:index' %}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'one:events' %}">Events</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Resources</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'one:about' %}">About us</a>
+          </li>
+        </ul>
+        <div class="navbar-text">
+          <button type="button"  id="but" class="btn btn-dark" onclick="on()"></button>
+    </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron jumbotron-fluid p-4 bg-dark" id="j">
+      <div class="container d-flex justify-content-center">
+        <h1 id="t1" class="td"> CAN BUILD RESOURCES </h1>
+      </div>
+    </div>
+
+
+
+    {% if resource %}
+    {% for r in resource %}
+    <div class="container" >
+      <div class="card col-sm" width=20rem style="background-color:#DCDCDC" >
+        <div class="card-body ">
+          <h3 class="card-title">{{ r.resourceName }} <h5>{{ r.resourcetDate }}</h5> </h3>
+          <p class="card-text">{{ r.resourceDiscription }}</p>
+          <a href="{{ r.resourceResource }}" class="btn btn-primary">Get Resource</a>
+          <a href="{{ r.resourceFeedback }}" class="btn btn-success">Give feedback</a>
+        </div>
+      </div>
+    </div>
+    <br>
+    {% endfor %}
+    {% else %}
+    <img src="{% static 'images/no.png' %}" alt="" class="d-block w-100" height="400">
+    {% endif %}
+
+
+
+
+    <br><br><br><br><br><br><br>
+
+    <footer id="footi" class="py-4 footc text-white-50 bg-dark ">
+        <div class="container text-center">
+          <a href="{% url 'admin:index' %}" ><h6>Canbuild Web</h6></a>
+          <small class="td" id="t2" >Developed by Vignesh Hegde</small>
+        </div>
+    </footer>
+
+
+
+    <style media="screen">
+    .btn:focus{
+      outline: none;
+      box-shadow: none;
+    }
+
+    .bdark {
+      background-color: #1A1A1D;
+      color:black ;
+    }
+    .bdlight {
+      background-color:#EDF2F8;
+      color: black;
+    }
+
+    .tl{
+      color:black ;
+    }
+
+    .td{
+      color:white ;
+    }
+
+    </style>
+
+    <script>
+    var i=sessionStorage.getItem("temp");
+    if (typeof i == 'undefined'){
+      i="0";
+    }
+      on()
+
+
+
+    function on(){
+      if(i=="1"){
+        sessionStorage.setItem("temp",i);
+        document.getElementById("but").innerHTML = "Dark";
+        document.getElementById("but").setAttribute("class", "btn btn-dark");
+        document.getElementById('navi').setAttribute("class", "navbar navbar-expand-lg  sticky-top navbar-light bg-light");
+        document.getElementById('footi').setAttribute("class", "py-4 footc text-white-50 bg-light");
+        document.getElementById('j').setAttribute("class", "jumbotron jumbotron-fluid p-4 bg-light");
+        document.getElementById('t1').setAttribute("class", "tl");
+        document.getElementById('t2').setAttribute("class", "tl");
+        document.getElementById('bd').setAttribute("class", "bdlight");
+        i="0";
+      }else{
+        sessionStorage.setItem("temp",i);
+        document.getElementById("but").innerHTML = "Light";
+        document.getElementById("but").setAttribute("class", "btn btn-light");
+        document.getElementById('navi').setAttribute("class", "navbar navbar-expand-lg  sticky-top navbar-dark bg-dark");
+        document.getElementById('footi').setAttribute("class", "py-4 footc text-white-50 bg-dark");
+        document.getElementById('j').setAttribute("class", "jumbotron jumbotron-fluid p-4 bg-dark");
+        document.getElementById('t1').setAttribute("class", "td");
+        document.getElementById('t2').setAttribute("class", "td");
+        document.getElementById('bd').setAttribute("class", "bdark");
+        i="1";
+      }
+    }
+    </script>
+
+
+
+  </body>
+</html>

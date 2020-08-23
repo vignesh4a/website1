@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CanBuild</title>
+  </head>
+
+
+
+
+  <body id="bd" class="bdark">
+    <nav  id="navi" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <a class="navbar-brand"><img src="{% static 'images/logo.png' %}" alt="CANBUILS" width="30"> Canbuild </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'one:events' %}">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'one:resources' %}">Resources</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'one:about' %}">About us</a>
+          </li>
+        </ul>
+        <div class="navbar-text">
+          <button type="button"  id="but" class="btn btn-dark" onclick="on()"></button>
+    </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron jumbotron-fluid p-4 bg-dark" id="j">
+      <div class="container d-flex justify-content-center">
+        <h1 id="t1" class="td"> CAN BUILD </h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <div  id="count1" class="container bg-dark" style="border-radius: 10px;">
+        <br>
+        <br>
+        {% if gal %}
+        <div id="carouselExampleFade1" class="carousel slide carousel-fade" data-ride="carousel">
+          <div class="carousel-inner">
+            {% for g in gal %}
+            {% if forloop.counter == 1 %}
+              <div class="carousel-item active ">
+                {% else %}
+                <div class="carousel-item ">
+                  {% endif %}
+                  <a><img src="{{ g.Images }}" alt="" class="d-block w-100 rounded" height="500"> </a>
+                  <div class="carousel-caption rounded" style="background-color:rgba(0, 0, 0, 0.6);">
+                    <h2>{{ g.Name }}</h2>
+                  </div>
+                </div>
+                {% endfor %}
+                <a class="carousel-control-prev" href="#carouselExampleFade1" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleFade1" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+              {% else %}
+              <img src="{% static 'images/stay.png' %}" class="d-block w-100 rounded " alt="NOT FOUND!" height="400">
+              {% endif %}
+              <br><br><br>
+            </div>
+
+          </div><br><br>
+        </div>
+
+    <div class="container">
+      <div id="cont" class="container bg-dark" style="border-radius: 10px;"  >
+        <p><br>
+
+<p>
+  Canbuild is a  learning platform that provides students with a holistic learning experience to help make
+   them good in technical and communucation fields.
+   Online classes with hands on learning sessions, it allows students to Learn Here and Lead Anywhere.
+</p>
+<p>
+  Canbuild is developed by considering the future of the students in academic and non-academic development.
+  Here the students learn.
+  <ul>
+    <li>Android App Development</li>
+    <li>Arduino</li>
+    <li>Circuit Design and Development</li>
+    <li>Resume Building</li>
+    <li>Machine Learning</li>
+    <li>IOT</li>
+  And many more .....
+  </ul>
+</p>
+<p>CanBuild works to provide the basic knowledge to the students in many fields with free of cost.
+Developed by the students, For the students. Join our hands with your whole heart.</p>
+
+
+
+        </p><br>
+      </div>
+    </div>
+
+
+
+
+
+
+
+<br><br><br><br><br><br><br>
+
+<footer id="footi" class="py-4 footc text-white-50 bg-dark ">
+    <div class="container text-center">
+      <a href="{% url 'admin:index' %}" ><h6>Canbuild Web</h6></a>
+      <small class="td" id="t2" >Developed by Vignesh Hegde</small>
+    </div>
+</footer>
+
+
+
+<style media="screen">
+.btn:focus{
+  outline: none;
+  box-shadow: none;
+}
+
+p{
+margin: 20px;
+text-align: justify;
+text-justify: inter-word;
+}
+
+.bdark {
+  background-color: #1A1A1D;
+  color:white ;
+}
+
+
+.bdlight {
+  background-color:#EDF2F8;
+  color: black;
+}
+
+.tl{
+  color: black;
+}
+
+.td{
+  color: white;
+}
+
+</style>
+
+<script>
+var i=sessionStorage.getItem("temp");
+if (typeof i == 'undefined'){
+  i="0";
+}
+ on()
+
+
+
+function on(){
+  if(i=="1"){
+    sessionStorage.setItem("temp",i);
+    document.getElementById('navi').setAttribute("class", "navbar navbar-expand-lg  sticky-top navbar-light bg-light");
+    document.getElementById('footi').setAttribute("class", "py-4 footc text-white-50 bg-light");
+    document.getElementById('j').setAttribute("class", "jumbotron jumbotron-fluid p-4 bg-light");
+    document.getElementById("cont").setAttribute("class", "container bg-light");
+    document.getElementById("count1").setAttribute("class", "container bg-light");
+    document.getElementById('t1').setAttribute("class", "tl");
+    document.getElementById('t2').setAttribute("class", "tl");
+    document.getElementById('bd').setAttribute("class", "bdlight");
+    document.getElementById("but").innerHTML = "Dark";
+    document.getElementById("but").setAttribute("class", "btn btn-dark");
+    i="0";
+  }else{
+    sessionStorage.setItem("temp",i);
+    i="1";
+    document.getElementById('navi').setAttribute("class", "navbar navbar-expand-lg  sticky-top navbar-dark bg-dark");
+    document.getElementById('footi').setAttribute("class", "py-4 footc text-white-50 bg-dark");
+    document.getElementById('j').setAttribute("class", "jumbotron jumbotron-fluid p-4 bg-dark");
+    document.getElementById("cont").setAttribute("class", "container bg-dark");
+    document.getElementById("count1").setAttribute("class", "container bg-dark");
+    document.getElementById('t1').setAttribute("class", "td");
+    document.getElementById('t2').setAttribute("class", "td");
+    document.getElementById('bd').setAttribute("class", "bdark");
+    document.getElementById("but").innerHTML = "Light";
+    document.getElementById("but").setAttribute("class", "btn btn-light");
+  }
+}
+
+</script>
+
+
+
+
+  </body>
+</html>
