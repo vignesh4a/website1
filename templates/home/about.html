@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en" dir="ltr">
-<link rel="icon" href="{% static 'images/logo.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -22,14 +22,17 @@
             <a class="nav-link" href="{% url 'one:index' %}">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="{% url 'one:events' %}">Events</a>
+            <a class="nav-link" href="{% url 'one:resources' %}">Events</a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="{% url 'one:resources' %}">Resources</a>
+            <a class="nav-link" href="{% url 'one:gallery' %}">Gallery</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="#">About us</a>
           </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="https://docs.google.com/forms/d/e/1FAIpQLScEmuzfPuSrDb9K80IgyqKPBS1n-oJA3YqoWl_K3s64R7-9WA/viewform?usp=sf_link">Join</a>
+           </li>
         </ul>
           <div class="navbar-text">
             <button type="button"  id="but" class="btn btn-dark" onclick="on()"></button>
@@ -66,7 +69,7 @@
     <div class="container" >
     {% if about %}
     {% for a in about %}
-        <div  class="card col-sm" width=20rem style="background-color:#DCDCDC" >
+        <div  class="card col-sm" width=20rem style="background-color:#DCDCDC;border-radius:8px" >
           <div class="card-body ">
             <div class="row">
               <div class="col-sm">
@@ -91,13 +94,7 @@
   </div>
 </div>
 
-
-
-
-
 <br><br><br>
-
-<br><br><br><br><br><br><br>
 
 <footer id="footi" class="py-4 footc text-white-50 bg-dark ">
     <div class="container text-center">

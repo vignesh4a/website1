@@ -1,9 +1,9 @@
 from django.contrib import admin
-from one.models import Event,Resource,AboutUs,EventsOver,Gal
+from one.models import UpcommingEvent,AboutUs,Events,Home,Gallery
 # Register your models here.
 
-admin.site.register(Event)
-admin.site.register(Resource)
+admin.site.register(UpcommingEvent)
+admin.site.register(Events)
 admin.site.register(AboutUs)
-admin.site.register(EventsOver)
-admin.site.register(Gal)
+admin.site.register(Gallery)
+admin.site.register(Home)

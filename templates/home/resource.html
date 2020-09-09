@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en" dir="ltr">
-<link rel="icon" href="{% static 'images/logo.png' %}">
-
+<link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}">
+<script src="https://kit.fontawesome.com/faaf181606.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -25,15 +25,18 @@
           <li class="nav-item ">
             <a class="nav-link" href="{% url 'one:index' %}">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{% url 'one:events' %}">Events</a>
-          </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Resources</a>
+            <a class="nav-link" href="#">Events</a>
+          </li>
+        <li class="nav-item ">
+            <a class="nav-link" href="{% url 'one:gallery' %}">Gallery</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'one:about' %}">About us</a>
           </li>
+           <li class="nav-item ">
+            <a class="nav-link" href="https://docs.google.com/forms/d/e/1FAIpQLScEmuzfPuSrDb9K80IgyqKPBS1n-oJA3YqoWl_K3s64R7-9WA/viewform?usp=sf_link">Join</a>
+           </li>
         </ul>
         <div class="navbar-text">
           <button type="button"  id="but" class="btn btn-dark" onclick="on()"></button>
@@ -43,16 +46,60 @@
 
     <div class="jumbotron jumbotron-fluid p-4 bg-dark" id="j">
       <div class="container d-flex justify-content-center">
-        <h1 id="t1" class="td"> CAN BUILD RESOURCES </h1>
+        <h1 id="t1" class="td"> EVENTS </h1>
       </div>
     </div>
 
+{% if resource.number == 1 %}
+    <div class="container ">
+        <div  id="count2" class="container bg-dark td" style="border-radius: 10px;">
+          <br>
+          <h2>Upcomming Events</h2>
+          <br>
+          {% if event %}
+          <div id="carouselExampleFade2" class="carousel slide " data-ride="carousel">
+            <div class="carousel-inner">
+              {% for e in event %}
+              {% if forloop.counter == 1 %}
+                <div class="carousel-item active ">
+                  {% else %}
+                  <div class="carousel-item ">
+                    {% endif %}
+                    <a href="{{ e.eventRegistration }}"><img src="{{ e.eventImage }}" alt="" class="d-block w-100 rounded" height="400"> </a>
+                    <div class="carousel-caption rounded" style="background-color:rgba(0, 0, 0, 0.6);">
+                      <h2>{{ e.eventName  }}</h2>
+                      <h4>{{ e.eventDate }}</h4>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  <a class="carousel-control-prev" href="#carouselExampleFade2" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleFade2" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                  </div>
+                {% else %}
+                <img src="{% static 'images/stay.png' %}" class="d-block w-100 rounded " alt="NOT FOUND!" height="400">
+                {% endif %}
+                <br>
+              </div>
+              </div>
+              </div>
+              </div>
+              <br><br><br>
+              {% else %}
+              <p id="count2" ></p>
+     {% endif %}
 
-
-    {% if resource %}
-    {% for r in resource %}
     <div class="container" >
-      <div class="card col-sm" width=20rem style="background-color:#DCDCDC" >
+    {% if resource %}
+    <div class="row">
+            {% for r in resource %}
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12" >
+      <div class="card " width=20rem style="background-color:#DCDCDC;border-radius:8px;" >
         <div class="card-body ">
           <h3 class="card-title">{{ r.resourceName }} <h5>{{ r.resourcetDate }}</h5> </h3>
           <p class="card-text">{{ r.resourceDiscription }}</p>
@@ -60,17 +107,42 @@
           <a href="{{ r.resourceFeedback }}" class="btn btn-success">Give feedback</a>
         </div>
       </div>
-    </div>
     <br>
+    </div>
     {% endfor %}
+    </div>
     {% else %}
     <img src="{% static 'images/no.png' %}" alt="" class="d-block w-100" height="400">
     {% endif %}
+ </div>
 
 
 
+    <br><br><br>
 
-    <br><br><br><br><br><br><br>
+    <div id="t3" class="pagination justify-content-center">
+        {% if resource.paginator.num_pages != 1 %}
+        {% if resource.has_previous %}
+        <a class="vi" href="?page=1"> <i class="fa fa-angle-double-left" aria-hidden="true"></i> </a>
+        <a class="vi" href="?page={{ resource.previous_page_number }}"> <i class="fa fa-angle-left" aria-hidden="true"></i> </a>
+        {% endif %}
+
+    {% for num in resource.paginator.page_range %}
+    {% if resource.number == num %}
+        <strong class="v" >{{ num }}</strong>
+        {% elif num > resource.number|add:'-3' and num < resource.number|add:'3' %}
+        <a href="?page={{ num }}"><p class="v">{{ num }} <p><a>
+        {% endif %}
+        {% endfor %}
+
+        {% if resource.has_next %}
+        <a class="vi" href="?page={{ resource.next_page_number }}"> <i class="fa fa-angle-right" aria-hidden="true"></i> </a>
+        <a class="vi" href="?page={{ resource.paginator.num_pages }}"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+        {% endif %}
+        {% endif %}
+    </div>
+
+    <br><br>
 
     <footer id="footi" class="py-4 footc text-white-50 bg-dark ">
         <div class="container text-center">
@@ -104,6 +176,19 @@
       color:white ;
     }
 
+    .v{
+        text-align:center;
+        font-size:20px;
+        margin-left:5px;
+        margin-right:5px;
+    }
+    .vi{
+        display:inline-block;
+        margin-left:8px;
+        margin-right:8px;
+        font-size:20px;
+    }
+
     </style>
 
     <script>
@@ -117,6 +202,7 @@
 
     function on(){
       if(i=="1"){
+
         sessionStorage.setItem("temp",i);
         document.getElementById("but").innerHTML = "Dark";
         document.getElementById("but").setAttribute("class", "btn btn-dark");
@@ -125,7 +211,11 @@
         document.getElementById('j').setAttribute("class", "jumbotron jumbotron-fluid p-4 bg-light");
         document.getElementById('t1').setAttribute("class", "tl");
         document.getElementById('t2').setAttribute("class", "tl");
+        document.getElementById('t3').setAttribute("class", "pagination justify-content-center tl");
         document.getElementById('bd').setAttribute("class", "bdlight");
+        document.getElementById("count2").setAttribute("class", "container bg-light tl");
+
+
         i="0";
       }else{
         sessionStorage.setItem("temp",i);
@@ -136,7 +226,9 @@
         document.getElementById('j').setAttribute("class", "jumbotron jumbotron-fluid p-4 bg-dark");
         document.getElementById('t1').setAttribute("class", "td");
         document.getElementById('t2').setAttribute("class", "td");
+        document.getElementById('t3').setAttribute("class", "pagination justify-content-center td");
         document.getElementById('bd').setAttribute("class", "bdark");
+        document.getElementById("count2").setAttribute("class", "container bg-dark td");
         i="1";
       }
     }

@@ -24,9 +24,9 @@ STATIC_DIR = os.path.join(BASE_DIR,'static')
 SECRET_KEY = ')m$h=iff993apm2)yrb-oi#$wi)%6j9&&o$lbhn4qb_quovp9_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['canbuild.pythonanywhere.com']
 
 
 # Application definition
@@ -120,9 +120,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS=[
-    STATIC_DIR,
-]
+#STATICFILES_DIRS=[
+#    STATIC_DIR,
+#]
+
+STATIC_ROOT = '/home/canbuild/website/static'
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
